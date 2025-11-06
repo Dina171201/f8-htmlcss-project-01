@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="./assets/css/reset.css" />
         <!-- Style -->
         <link rel="stylesheet" href="./assets/css/styles.css" />
+        <link rel="stylesheet" href="./assets/css/responsive.css">
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="57x57" href="./assets/favicon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="./assets/favicon/apple-icon-60x60.png">
@@ -34,20 +35,33 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
     <body>
-            <!-- Header -->
+            <!--PC Header -->
             <header class="fixed-header">
                 <div class="content">
                     <nav class="navbar">
+                        <!-- Tablet mobile menu -->
+                         <label class="toggle-menu" for="menu-checkbox">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                 viewBox="0 0 640 640"
+                            >
+                                 <path
+                                    fill="currentColor"
+                                    d="M96 160C96 142.3 110.3 128 128 128L512 128C529.7 128 544 142.3 544 160C544 177.7 529.7 192 512 192L128 192C110.3 192 96 177.7 96 160zM96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320zM544 480C544 497.7 529.7 512 512 512L128 512C110.3 512 96 497.7 96 480C96 462.3 110.3 448 128 448L512 448C529.7 448 544 462.3 544 480z"/>
+                            </svg>
+                        </label>
+
                         <!-- Logo -->
-                        <a href="#"><img src="./assets/img/logo.svg" alt="Besnik." /></a>
+                        <a href="#"><img class="logo" src="./assets/img/logo.svg" alt="Besnik." /></a>
 
                         <!-- Navigation -->
-                        <ul>
+                        <ul id="pc-nav">
                             <li><a href="#">Home</a></li>
                             <li><a href="#services">Services</a></li>
                             <li><a href="#features">Features</a></li>
                             <li><a href="#resources">Resources</a></li>
                             <li><a href="#contact">Contact</a></li>
+                            <li><a class="show-on-mobile separate" href="#!">Sign in</a></li>
+                            <li><a class="show-on-mobile" href="#!">Sign up</a></li>
                         </ul>
 
                         <!-- Action -->
@@ -59,6 +73,27 @@
                 </div>
             </header>
 
+            <!-- Tablet mobile header -->
+            <header class="mobile-header">
+                <input type="checkbox" name="" id="menu-checkbox" class="menu-checkbox" hidden>
+                <!-- Overlay -->
+                <label for="menu-checkbox" class="menu-overlay"></label for="">
+
+                <!-- Menu content -->
+                 <div class="menu-drawer">
+                    <!-- Logo -->
+                        <a href="#"><img src="./assets/img/logo.svg" alt="Besnik." /></a>
+                        <!-- Navigation -->
+                        <ul id="mobile-nav"></ul>
+                        <script>
+                            const pcNav = document.querySelector("#pc-nav");
+                            const mobileNav = document.querySelector("#mobile-nav");
+
+                            // Copy from pc-nav to mobile-nav
+                            mobileNav.innerHTML = pcNav.innerHTML;
+                        </script>
+                 </div>
+            </header>
         <main>           
             <div class="hero-wrap">
                 <div class="content">
@@ -619,5 +654,43 @@
                 </div>
              </footer>
 
-    </body>
+    <!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
 </html>
